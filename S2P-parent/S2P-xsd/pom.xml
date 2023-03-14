@@ -10,6 +10,61 @@
     </parent>
 
     <artifactId>S2P-xsd</artifactId>
+    <packaging>jar</packaging>
 
+    <properties>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
+    <dependencies>
+        <!-- required after java 8 as generated sources use binding -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <!-- Gregorian calendar impl -->
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>2.5.0</version>
+                <executions>
+                    <execution>
+                        <id>Generate POJO from XSD</id>
+                        <!-- For maven [jar/war] projects, will run before compile -->
+                        <!-- <phase>process-resources</phase> -->
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sources>
+                        <source>src/main/resources/schema/bindings/datebinding.xjb</source>
+                        <source>src/main/resources/schema/schema.xsd</source>
+                    </sources>
+
+                    <packageName>dk.reibke.s2p.xsd.generated</packageName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--
+    <modules>
+        <module>S2P-xsd-generator</module>
+        <module>S2P-xsd-runner</module>
+    </modules>
+    -->
 </project>
