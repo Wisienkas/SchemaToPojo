@@ -10,6 +10,6 @@ Examples on how to do schema to POJO automatic generation during java projects
    - [ ] Add example for custom bindings
  - [x] JsonSchema to POJO generation
    - [ ] Find way to include builders, factory or similar patterns
- - [ ] OpenAPi to POJO generation
+ - [x] OpenAPi to POJO generation
  - [x] Proto to POJO generation
    - [ ] Attempt without generating Proto protocol
